@@ -1,5 +1,5 @@
 body{
-  background-image: url("../images/music_bg_3.jpg");
+  background-image: url("../images/music_bg_1.jpg");
   background-size: cover;
 }
 
@@ -8,25 +8,46 @@ h1.titles{
 	font-weight: 900;
 	font-family: Impact, Charcoal, sans-serif;
 	text-shadow: 0 10px 10px rgba(0,0,0,.2), 0 20px 20px rgba(0,0,0,.15);
-	background: -webkit-linear-gradient(330deg, #e05252 0%, #99e052 25%, #52e0e0 50%, #9952e0 75%, #e05252 100%);
-	background: linear-gradient(330deg, #e05252 0%, #99e052 25%, #52e0e0 50%, #9952e0 75%, #e05252 100%);
+	background: -webkit-linear-gradient(330deg, #f7f406 0%, #99e052 25%, #52e0e0 50%, #9952e0 75%, #e05252 100%);
+	background: linear-gradient(330deg, #f7f406 0%, #99e052 25%, #52e0e0 50%, #9952e0 75%, #e05252 100%);
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 }
-#picture { opacity: .8; }
 
-#picture, #score-board {
+
+#picture, #score-screen {	
 	border-style: solid;
-	border-width: 25px 23px 25px 24px;
-	-moz-border-image: url("../images/music_2.jpg") 111 133 115 138 repeat;
-	-webkit-border-image: url("../images/music_2.jpg") 111 133 115 138 repeat;
-	border-image: url("../images/music_2.jpg") 111 133 115 138 repeat;
-	background-color: white;
+	border-width: 29px 35px;
+	-moz-border-image: url("../images/rope_1.png") 29 35 round;
+	-webkit-border-image: url("../images/rope_1.png") 29 35 round;
+	-o-border-image: url("../images/rope_1.png") 29 35 round;
+	border-image: url("../images/rope_1.png") 29 35 fill round;
 	font-family: Arial Black, Gadget, sans-serif;
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 700;
 	text-shadow: 4px 4px 6px rgba(0,0,0,0.5) ;
 }
+.score-board {
+	background-color: white;
+	padding: 10px;
+	border: 3px dotted #c3aa1f;
+	margin: 11px 0;
+}
+
+.begin {
+	color: #168e90;
+    border-bottom: 3px dotted #c3aa1f;
+    padding-bottom: 10px;
+    font-size: 20px;
+}
+
+#win-count, #no-guess, #guessed-letters {
+	color: darkorchid;
+}
+
+#guessed-letters{
+	text-transform: uppercase;
+	word-wrap: break-word;
 
 footer {
  	padding: 5px;

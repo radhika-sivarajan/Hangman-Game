@@ -14,25 +14,26 @@
 <body>
 	<div class="container">
 		<div class="row text-center">
-			<h1 class="titles">HANGMAN GAME</h1>			
+			<div class="col-md-8 col-md-offset-2">
+				<h1 class="titles">HANGMAN GAME</h1>	
+			</div>		
 		</div>	
 
 		<div class="row text-center" id="artist-name"></div>	
 
 		<div class="row">
-			<div class="col-md-3 col-md-offset-2" id="picture">				
-				<img src="assets/images/hangman.jpg"  class="img-responsive center-block">
+			<div class="col-md-3 col-md-offset-2" id="picture">			
+				<img src="assets/images/hangman.jpg" class="img-responsive center-block">
 			</div>
-			<div class="col-md-4 col-md-offset-1 text-center" id="score-board">
-				Press any key to start.
-				<br>wins
-				<br>Current word
-				<br>- - - - - -
-				<br>Number of guesses remaining
-				<br>12
-				<br>Letters already guessed
+			<div class="col-md-4 col-md-offset-1 text-center" id="score-screen">
+			<div class="score-board">
+				<p class="begin">Press a key to start.</p>
+				Wins<p id="win-count"></p>
+				Current word<p id="current-word"></p>
+				Number of guesses remaining<p id="no-guess"></p>
+				Letters already guessed<p id="guessed-letters"></p>
 			</div>
-			
+			</div>			
 		</div>
 	</div>
 
