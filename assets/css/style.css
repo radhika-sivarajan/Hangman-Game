@@ -14,6 +14,14 @@ h1.titles{
 	-webkit-text-fill-color: transparent;
 }
 
+#artist-name{
+	font-family: "Brush Script MT", cursive;
+    font-size: 50px;
+    color: #da660e;
+	text-shadow: 4px 4px 6px rgba(0,0,0,0.5) ;
+	padding: 5px;
+    margin-bottom: 10px;
+}
 
 #picture, #score-screen {	
 	border-style: solid;

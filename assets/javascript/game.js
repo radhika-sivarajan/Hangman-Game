@@ -1,12 +1,39 @@
-//Replacing the current word with '_'
-function replaceWord(artistName){
-	var artistHidden = artistName.replace(/\S/gi, '_ ');
-	document.getElementById("current-word").innerHTML = artistHidden;
+var artistNames = ["beyonce", "ariana", "zayn", "sia", "bruno", "adele", "rihanna"];
+var win = 0;
+var guessLimit = 12;
+var userInputs = new Array();
+
+
+function startgame(){
+	var currentWord = randomWord();
+	var currentWordSplit = currentWord.split("");
+	var displayWord = new Array();
+
+	for(var i = 0; i < currentWord.length; i++){
+		displayWord[i]= '_ ';
+	}
+	replaceWord(displayWord.join(' '));
+
+	return {
+		currentWord: currentWord,
+		currentWordSplit: currentWordSplit,
+		displayWord: displayWord
+	};
 }
 
-//Reset values of user guesslimit
-function resetScore(inputArray){
-	inputArray.splice(0,inputArray.length);	
+function resetScore(){
+	userInputs.splice(0,userInputs.length);	
+	guessLimit = 12;
+}
+
+function randomWord(){
+	return artistNames[Math.floor(Math.random() * artistNames.length)];
+	
+}
+
+//Replacing the current word with '_'
+function replaceWord(word){
+	document.getElementById("current-word").innerHTML = word;
 }
 
 //Updating scoreboard with  new win count, guesses remaining, and user input alphabets
@@ -21,66 +48,128 @@ function isInArray(value, array) {
   return array.indexOf(value) > -1;
 }
 
-var artistNames = ["beyonce", "ariane", "zayn", "sia", "bruno"];
-var artistRandom = artistNames[Math.floor(Math.random() * artistNames.length)];
-var game = {
-	wins: 0,
-	guessLimit: 12,
-	currentWord: null,
-	startGame: function(word) {
-		this.currentWord = word;
-		var userInputs = new Array();
-		var win = this.wins;
-		var gLeft = this.guessLimit;
-		var curWord = this.currentWord; 
-		var curWordSplit = curWord.split("");
+function imageMusic(word){
 
-		replaceWord(this.currentWord);
-		resetScore(userInputs);
-		updateScoreboard(this.wins, gLeft, userInputs);
-		
-		console.log(this.wins, this.currentWord, this.guessLimit, userInputs);
+	var urlMusic;
 
-		document.onkeydown = function(event) {
-			var userGuess = event.key.toLowerCase();
-					
-			//If key pressed is an alphabet
-			if (event.keyCode >= 65 && event.keyCode <= 90){
+	if(word==="beyonce"){
+		document.getElementById("artist-name").innerHTML = "Beyonce - Halo";	
+		document.getElementById("picture").src="assets/images/beyonce.jpg";
+		urlMusic = "assets/audio/halo.mp3";
+		playSound(urlMusic);
+	}
+	if(word==="ariana"){
+		document.getElementById("artist-name").innerHTML = "Ariana Grande- In to you";
+		document.getElementById("picture").src="assets/images/ariana.jpg";
+		urlMusic = "assets/audio/ariana.mp3";
+		playSound(urlMusic);
+	}
+	if(word==="zayn"){
+		document.getElementById("artist-name").innerHTML = "Zayn Malik - Like I would";
+		document.getElementById("picture").src="assets/images/zayn.jpg";
+		urlMusic = "assets/audio/zayn.mp3";
+		playSound(urlMusic);
+	}
+	if(word==="sia"){
+		document.getElementById("artist-name").innerHTML = "Sia - Cheap thrills";
+		document.getElementById("picture").src="assets/images/sia.jpg";
+		urlMusic = "assets/audio/sia.mp3";
+		playSound(urlMusic);
+	}
+	if(word==="bruno"){
+		document.getElementById("artist-name").innerHTML = "Bruno Mars - Uptown funk";
+		document.getElementById("picture").src="assets/images/bruno.jpg";
+		urlMusic = "assets/audio/bruno.mp3";	
+		playSound(urlMusic);
+	}
+	if(word==="adele"){
+		document.getElementById("artist-name").innerHTML = "Adele - Rolling in the Deep";
+		document.getElementById("picture").src="assets/images/adele.jpg";
+		urlMusic = "assets/audio/adele.mp3";
+		playSound(urlMusic);
+	}
+	if(word==="rihanna"){
+		document.getElementById("artist-name").innerHTML = "Rihanna - Diamonds";
+		document.getElementById("picture").src="assets/images/rihanna.jpg";
+		urlMusic = "assets/audio/rihanna.mp3";
+		playSound(urlMusic);
+	}
 
-				//If the alphabet already entered
-				if (isInArray(userGuess, userInputs)) {
-				  alert('Alphabet already entered');
-				} else {
+}
 
-					//Check the letter entered in the current word
-					if (isInArray(userGuess, curWordSplit)){
-						console.log(curWordSplit.indexOf(userGuess));
+function playSound(url){
+  var audio = document.createElement('audio');
+  //audio.style.display = "none";
+  audio.src = url;
+  audio.autoplay = true;
+  audio.onended = function(){
+    audio.remove() //Remove when played.
+  };
+  document.body.appendChild(audio);
+}
 
-						//while(curWordSplit.indexOf(userGuess) >= 0) {
-							//.splice(location,1)
-						//}
 
-					}
+var game = startgame();
+var curWord = game.currentWord;
+var curWordSplit = game.currentWordSplit;
+var disp = game.displayWord;
 
-					gLeft--;					
-					userInputs.push(userGuess);					
-					console.log(curWordSplit);
+document.onkeydown = function(event) {
+	var userGuess = event.key.toLowerCase();
 
-					if (gLeft<1){
-						resetScore(userInputs);
-						gLeft =12;
-					}
+			
+	//If key pressed is an alphabet
+	if (event.keyCode >= 65 && event.keyCode <= 90){
+		if (disp.join()===curWordSplit.join()){	
+			imageMusic(curWord);	
+			alert("Correct: The word is " + curWord.toUpperCase());
+			win++;
 
-					updateScoreboard(win, gLeft, userInputs);
-					console.log(gLeft, userInputs);
-				}	
-			}
-			else{
-				alert("Enter an alphabet");
-			}
-		};
+			userInputs.splice(0,userInputs.length);	
+			guessLimit = 12;
+			game = startgame();
+			curWord = game.currentWord;
+			curWordSplit = game.currentWordSplit;
+			disp = game.displayWord;
+		}
+
+		if (guessLimit<=0){
+			alert("LOST: The word is" + curWord.toUpperCase());
+			
+			userInputs.splice(0,userInputs.length);	
+			guessLimit = 12;
+			game = startgame();
+			curWord = game.currentWord;
+			curWordSplit = game.currentWordSplit;
+			disp = game.displayWord;
+		}	
+
+		//If the alphabet already entered
+		if (isInArray(userGuess, userInputs)) {
+	  		alert('Alphabet already entered');
+		} else {
+
+			guessLimit--;
+			userInputs.push(userGuess);
+			for(var i = 0; i < curWord.length; i++){
+				
+		    	// Check the input against the current letter we're looping over
+		    	if(userGuess === curWord[i]){
+		      		
+		          	// We have a match, put the letter in the same position
+		          	disp[i]= userGuess;
+		    	}
+	  		}	
+	  		document.getElementById("current-word").innerHTML = disp.join(' ');			  		
+	  		updateScoreboard(win, guessLimit, userInputs);
+		}
+		console.log(win, curWord, guessLimit, userInputs, curWordSplit, disp);
+	
+	}
+	else{
+
+		alert("Enter an alphabet");
 	}
 };
+	
 
-
-game.startGame(artistRandom);
