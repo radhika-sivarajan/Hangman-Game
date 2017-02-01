@@ -39,7 +39,7 @@ h1.titles{
 	background-color: white;
 	padding: 10px;
 	border: 3px dotted #c3aa1f;
-	margin: 11px 0;
+	margin: 11px 0;	
 }
 
 .begin {
@@ -49,7 +49,7 @@ h1.titles{
     font-size: 20px;
 }
 
-#win-count, #no-guess, #guessed-letters {
+#win-count, #no-guess, #guessed-letters,#current-word {
 	color: darkorchid;
 }
 
