@@ -124,11 +124,12 @@ document.onkeydown = function(event) {
 	  		updateScoreboard(win, guessLimit, userInputs);
 		}
 
+		//If the user guessed the name correct
 		if (disp.join()===curWordSplit.join()){
 			win++;	
 			userInputs.push(userGuess);
-			imageMusic(curWord);	
-			alert("Correct: The word is " + curWord.toUpperCase());
+			imageMusic(curWord);
+			alert("WON: The word is " + curWord.toUpperCase());
 			resetScore();
 
 			game = startgame();
@@ -137,6 +138,7 @@ document.onkeydown = function(event) {
 			disp = game.displayWord;			
 		}
 
+		//If tthe guss limit is over
 		if (guessLimit<=0){
 			alert("LOST: The word is " + curWord.toUpperCase());			
 			resetScore();
@@ -147,7 +149,7 @@ document.onkeydown = function(event) {
 			disp = game.displayWord;			
 		}	
 
-		//console.log(" END win: " + win + " curWord: " + curWord + " guessLimit: " + guessLimit + " userInputs: " + userInputs + " curWordSplit: " + curWordSplit + " disp: " + disp);
+		//console.log(" VARIABLES win: " + win + " curWord: " + curWord + " guessLimit: " + guessLimit + " userInputs: " + userInputs + " curWordSplit: " + curWordSplit + " disp: " + disp);
 	
 	}
 	else{
