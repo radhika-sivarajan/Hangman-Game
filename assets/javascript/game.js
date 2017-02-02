@@ -3,7 +3,7 @@ var win = 0;
 var guessLimit = 12;
 var userInputs = new Array();
 
-
+//Stat game (generate random name, display as '_', create an array  with the generated word )
 function startgame(){
 	var currentWord = randomWord();
 	var currentWordSplit = currentWord.split("");
@@ -21,14 +21,9 @@ function startgame(){
 	};
 }
 
-function resetScore(){
-	userInputs.splice(0,userInputs.length);	
-	guessLimit = 12;
-}
-
+//Generate random artist name from the list
 function randomWord(){
-	return artistNames[Math.floor(Math.random() * artistNames.length)];
-	
+	return artistNames[Math.floor(Math.random() * artistNames.length)];	
 }
 
 //Replacing the current word with '_'
@@ -89,18 +84,6 @@ function imageMusic(word){
 	}
 }
 
-function playSound(url){
-  var audio = document.createElement('audio');
-  //audio.style.display = "none";
-  audio.src = url;
-  audio.autoplay = true;
-  audio.onended = function(){
-    audio.remove() //Remove when played.
-  };
-  document.body.appendChild(audio);
-}
-
-
 var game = startgame();
 var curWord = game.currentWord;
 var curWordSplit = game.currentWordSplit;
@@ -112,29 +95,6 @@ document.onkeydown = function(event) {
 			
 	//If key pressed is an alphabet
 	if (event.keyCode >= 65 && event.keyCode <= 90){
-		if (disp.join()===curWordSplit.join()){	
-			imageMusic(curWord);	
-			alert("Correct: The word is " + curWord.toUpperCase());
-			win++;
-
-			userInputs.splice(0,userInputs.length);	
-			guessLimit = 12;
-			game = startgame();
-			curWord = game.currentWord;
-			curWordSplit = game.currentWordSplit;
-			disp = game.displayWord;
-		}
-
-		if (guessLimit<=0){
-			alert("LOST: The word is" + curWord.toUpperCase());
-			
-			userInputs.splice(0,userInputs.length);	
-			guessLimit = 12;
-			game = startgame();
-			curWord = game.currentWord;
-			curWordSplit = game.currentWordSplit;
-			disp = game.displayWord;
-		}	
 
 		//If the alphabet already entered
 		if (isInArray(userGuess, userInputs)) {
@@ -155,7 +115,34 @@ document.onkeydown = function(event) {
 	  		document.getElementById("current-word").innerHTML = disp.join(' ');			  		
 	  		updateScoreboard(win, guessLimit, userInputs);
 		}
-		console.log(win, curWord, guessLimit, userInputs, curWordSplit, disp);
+
+		if (disp.join()===curWordSplit.join()){
+			win++;	
+			userInputs.push(userGuess);
+			imageMusic(curWord);	
+			document.getElementById("current-word").innerHTML = curWord;
+			alert("Correct: The word is " + curWord.toUpperCase());
+			
+			game = startgame();
+			curWord = game.currentWord;
+			curWordSplit = game.currentWordSplit;
+			disp = game.displayWord;
+			userInputs.splice(0,userInputs.length);	
+			guessLimit = 12;
+		}
+
+		if (guessLimit<=0){
+			alert("LOST: The word is" + curWord.toUpperCase());
+			
+			game = startgame();
+			curWord = game.currentWord;
+			curWordSplit = game.currentWordSplit;
+			disp = game.displayWord;
+			userInputs.splice(0,userInputs.length);	
+			guessLimit = 12;
+		}	
+
+		console.log(" END win: " + win + " curWord: " + curWord + " guessLimit: " + guessLimit + " userInputs: " + userInputs + " curWordSplit: " + curWordSplit + " disp: " + disp);
 	
 	}
 	else{
