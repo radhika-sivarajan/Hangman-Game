@@ -124,7 +124,7 @@ document.onkeydown = function(event) {
 	  		updateScoreboard(win, guessLimit, userInputs);
 		}
 
-		//If the user guessed the name correct
+		//If the user guessed the name correctly
 		if (disp.join()===curWordSplit.join()){
 			win++;	
 			userInputs.push(userGuess);
@@ -138,7 +138,7 @@ document.onkeydown = function(event) {
 			disp = game.displayWord;			
 		}
 
-		//If tthe guss limit is over
+		//If the guess limit is over
 		if (guessLimit<=0){
 			alert("LOST: The word is " + curWord.toUpperCase());			
 			resetScore();
