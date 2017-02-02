@@ -43,6 +43,7 @@ function isInArray(value, array) {
   return array.indexOf(value) > -1;
 }
 
+//If the guessed name is correct play music, update image and title corresponding to the artist 
 function imageMusic(word){
 
 	var artistSong = document.getElementById("music"); 
@@ -84,6 +85,13 @@ function imageMusic(word){
 	}
 }
 
+//Reset Score and clear user input
+function resetScore(){
+	userInputs.splice(0,userInputs.length);	
+	guessLimit = 12;
+	updateScoreboard(win, guessLimit, userInputs);
+}
+
 var game = startgame();
 var curWord = game.currentWord;
 var curWordSplit = game.currentWordSplit;
@@ -91,13 +99,13 @@ var disp = game.displayWord;
 
 document.onkeydown = function(event) {
 	var userGuess = event.key.toLowerCase();
-
-			
+		
 	//If key pressed is an alphabet
 	if (event.keyCode >= 65 && event.keyCode <= 90){
 
 		//If the alphabet already entered
 		if (isInArray(userGuess, userInputs)) {
+
 	  		alert('Alphabet already entered');
 		} else {
 
@@ -120,29 +128,26 @@ document.onkeydown = function(event) {
 			win++;	
 			userInputs.push(userGuess);
 			imageMusic(curWord);	
-			document.getElementById("current-word").innerHTML = curWord;
 			alert("Correct: The word is " + curWord.toUpperCase());
-			
+			resetScore();
+
 			game = startgame();
 			curWord = game.currentWord;
 			curWordSplit = game.currentWordSplit;
-			disp = game.displayWord;
-			userInputs.splice(0,userInputs.length);	
-			guessLimit = 12;
+			disp = game.displayWord;			
 		}
 
 		if (guessLimit<=0){
-			alert("LOST: The word is" + curWord.toUpperCase());
-			
+			alert("LOST: The word is " + curWord.toUpperCase());			
+			resetScore();
+
 			game = startgame();
 			curWord = game.currentWord;
 			curWordSplit = game.currentWordSplit;
-			disp = game.displayWord;
-			userInputs.splice(0,userInputs.length);	
-			guessLimit = 12;
+			disp = game.displayWord;			
 		}	
 
-		console.log(" END win: " + win + " curWord: " + curWord + " guessLimit: " + guessLimit + " userInputs: " + userInputs + " curWordSplit: " + curWordSplit + " disp: " + disp);
+		//console.log(" END win: " + win + " curWord: " + curWord + " guessLimit: " + guessLimit + " userInputs: " + userInputs + " curWordSplit: " + curWordSplit + " disp: " + disp);
 	
 	}
 	else{
